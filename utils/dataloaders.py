@@ -70,11 +70,11 @@ def MyDataLoader(root, name, batch_size, num_workers=1, distributed=False, rank=
             train_dataset, batch_size=batch_size, shuffle=False, num_workers=0, sampler=train_sampler)
         
         eval_loader = torch.utils.data.DataLoader(
-            eval_dataset, batch_size=batch_size, shuffle=False, num_workers=0, sampler=eval_sampler)
+            eval_dataset, batch_size=16, shuffle=False, num_workers=0, sampler=eval_sampler)
     else:
         print("done5")
         train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
-        eval_loader = torch.utils.data.DataLoader(eval_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers)
+        eval_loader = torch.utils.data.DataLoader(eval_dataset, batch_size=16, shuffle=False, num_workers=num_workers)
     print("done6")
     print('Dataset:', name)
     print("#Traning images: ", len(train_dataset))
