@@ -9,4 +9,4 @@
 --optim=Adam
 --model=phcresnet18
 --n=2
---train_dir=/content/data/torch_saved
+--train_dir=/kaggle/input/cbis-ddsm-patches
