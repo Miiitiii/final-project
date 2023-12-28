@@ -50,7 +50,7 @@ def GetModel(str_model, n, num_classes=1, weights=None, shared=False, patch_weig
             nn.Linear(in_features=768, out_features=64, bias=True),
             nn.Dropout(p=0.2, inplace=True),
             nn.ReLU(),
-            nn.Linear(in_features=64, out_features=2, bias=True)
+            nn.Linear(in_features=64, out_features=num_classes, bias=True)
           )
         return net
 
