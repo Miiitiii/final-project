@@ -1,4 +1,8 @@
 from models import phc_models, real_models
+import torch
+import torch.nn as nn
+from torchvision.models import swin_t
+
 
 def GetModel(str_model, n, num_classes=1, weights=None, shared=False, patch_weights=True, visualize=False):
     """
@@ -37,6 +41,11 @@ def GetModel(str_model, n, num_classes=1, weights=None, shared=False, patch_weig
         return real_models.SEnet(num_classes=num_classes, weights=weights, patch_weights=patch_weights, visualize=visualize)
     elif str_model == 'physenet':
         return phc_models.PHYSEnet(n=n, num_classes=num_classes, weights=weights, patch_weights=patch_weights, visualize=visualize)
+
+    if str_model == 'swin':
+        net = swin_t(weights=None)
+        net.features[0][0] = nn.Conv2d(2, 96, kernel_size=(4, 4), stride=(4, 4))
+        return net
 
     else:
         raise ValueError ('Model not implemented, check allowed models (-help) \n \
