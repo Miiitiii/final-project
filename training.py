@@ -84,6 +84,7 @@ class Trainer():
            
             for i, data in enumerate(tqdm(train_loader)):
                 inputs, labels = data
+                inputs = inputs.to(torch.float32)
 
                 if self.num_views == 4:
                     labels = torch.cat([labels[0], labels[1]], dim=0)
@@ -131,6 +132,7 @@ class Trainer():
                 
             for j, eval_data in enumerate(tqdm(eval_loader)):
                 inputs, labels = eval_data
+                inputs = inputs.to(torch.float32)
 
                 if self.num_views == 4:
                     labels = torch.cat([labels[0], labels[1]], dim=0)
