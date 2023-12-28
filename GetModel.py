@@ -45,6 +45,13 @@ def GetModel(str_model, n, num_classes=1, weights=None, shared=False, patch_weig
     if str_model == 'swin':
         net = swin_t(weights=None)
         net.features[0][0] = nn.Conv2d(2, 96, kernel_size=(4, 4), stride=(4, 4))
+        net.head = nn.Sequential(
+        nn.Dropout(p=0.2, inplace=True),
+        nn.ReLU(in_features=768, out_features=64, bias=True),
+        nn.Dropout(p=0.2, inplace=True),
+        nn.ReLU(),
+        nn.Linear(in_features=64, out_features=2, bias=True)
+          )
         return net
 
     else:
