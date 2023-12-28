@@ -92,7 +92,7 @@ class Trainer():
                     labels = labels.view((-1, 1)).to(torch.float32)
 
                 if self.use_cuda:
-                    inputs, labels = inputs.cuda('cuda'), labels.cuda('cuda')
+                    inputs, labels = inputs.to('cuda'), labels.to('cuda')
                     
                 self.optimizer.zero_grad()
                 
@@ -111,6 +111,9 @@ class Trainer():
                                 for param in layer.a:
                                     regularization_loss += torch.sum(abs(param))
                     loss += 0.001 * regularization_loss
+
+
+                inputs, labels = inputs.to('cpu'), labels.to('cpu')
 
 
                 loss.backward()
@@ -136,7 +139,7 @@ class Trainer():
                     labels = labels.view((-1, 1)).to(torch.float32)
 
                 if self.use_cuda:
-                    inputs, labels = inputs.cuda('cuda'), labels.cuda('cuda')
+                    inputs, labels = inputs.to('cuda'), labels.to('cuda')
                 
                 if self.num_views == 4:
                     inputs = torch.split(inputs, split_size_or_sections=2, dim=1)
@@ -157,6 +160,8 @@ class Trainer():
 
                 y_pred = torch.cat((y_pred, predicted.view(predicted.shape[0]).cpu()))
                 y_true = torch.cat((y_true, labels.view(labels.shape[0]).cpu()))
+
+                inputs, labels = inputs.to('cpu'), labels.to('cpu')
 
             
             if self.distributed:
