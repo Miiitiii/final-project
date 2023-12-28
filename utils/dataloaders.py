@@ -59,8 +59,8 @@ def MyDataLoader(root, name, batch_size, num_workers=1, distributed=False, rank=
     training = pd.read_csv(train_df_path)
     validation = pd.read_csv(valid_df_path)
     print("done3")
-    train_dataset = MyDataset(training.values, transform=TRAIN_TRANSFORM_IMG)
-    eval_dataset = MyDataset(validation.values, transform=VAL_TRANSFORM_IMG)
+    train_dataset = MyDataset(training.values,root ,  transform=TRAIN_TRANSFORM_IMG)
+    eval_dataset = MyDataset(validation.values,root , transform=VAL_TRANSFORM_IMG)
     print("done4")
     if distributed:
         train_sampler = DistributedSampler(train_dataset, num_replicas=world_size, rank=rank, shuffle=True, drop_last=True)
