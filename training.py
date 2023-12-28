@@ -129,7 +129,7 @@ class Trainer():
             if self.distributed:
                 to_gather = dict(y_pred=None, y_true=None, loss_eval=None, loss_train=running_loss_train)
                 
-            for j, eval_data in enumerate(eval_loader, 0):
+            for j, eval_data in enumerate(tqdm(eval_loader)):
                 inputs, labels = eval_data
 
                 if self.num_views == 4:
