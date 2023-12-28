@@ -7,6 +7,6 @@
 --num_views=2
 --lr=0.00001
 --optim=Adam
---model=resnet18
+--model=swin
 --n=2
 --train_dir=/kaggle/input/cbis-ddsm-patches
