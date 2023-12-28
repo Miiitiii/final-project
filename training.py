@@ -45,7 +45,6 @@ class Trainer():
             self.val_criterion = self.criterion
         
         if self.use_cuda:
-            print("cudaaa huraaa")
             if pos_weight:
                 self.criterion.pos_weight = torch.tensor([pos_weight]).cuda('cuda')
 
@@ -101,8 +100,6 @@ class Trainer():
                     inputs = torch.split(inputs, split_size_or_sections=2, dim=1)
 
                 outputs = self.net(inputs)
-                print("output :" ,outputs)
-                print("labels :" , labels)
                 loss = self.criterion(outputs, labels)
 
                 if self.l1_reg:
