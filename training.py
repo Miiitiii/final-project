@@ -101,6 +101,8 @@ class Trainer():
                     inputs = torch.split(inputs, split_size_or_sections=2, dim=1)
 
                 outputs = self.net(inputs)
+                print("output :" ,outputs)
+                print("labels :" , labels)
                 loss = self.criterion(outputs, labels)
 
                 if self.l1_reg:
