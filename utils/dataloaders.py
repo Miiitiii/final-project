@@ -15,16 +15,17 @@ class MyDataset(torch.utils.data.Dataset):
     - transofrm: data transforms for auugmentation
     """
 
-    def __init__(self, samples, transform=None):
+    def __init__(self, samples , root , transform=None):
         self.num_samples = len(samples)
         self.data = samples
         self.transform = transform
+        self.root = root
 
     def __len__(self):
         return self.num_samples
         
     def __getitem__(self, idx):
-        img = cv2.imread(self.data[idx][1] , 0)
+        img = cv2.imread(self.root + self.data[idx][1] , 0)
         zero_img = np.zeros((img.shape[1],img.shape[1] , 2))
         zero_img[: , : , 0] = img[0:224 , :]
         zero_img[: , : , 1] = img[224: , :]
