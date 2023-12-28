@@ -45,6 +45,7 @@ class Trainer():
             self.val_criterion = self.criterion
         
         if self.use_cuda:
+            print("cudaaa huraaa")
             if pos_weight:
                 self.criterion.pos_weight = torch.tensor([pos_weight]).cuda('cuda')
 
